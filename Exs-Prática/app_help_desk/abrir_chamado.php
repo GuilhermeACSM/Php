@@ -1,12 +1,5 @@
 <?php
 require_once "validador_acesso.php";
-
-// Verificar se o botão "Voltar" foi pressionado
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['voltar'])) {
-  // Realiza o redirecionamento para home.php
-  header("Location: home.php");
-  exit();
-}
 ?>
 
 <html lang="pt-br">
@@ -75,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['voltar'])) {
                   <div class="row mt-5">
                     <div class="col-6">
                       
-                      <button class="btn btn-lg btn-warning btn-block" type="submit" name="voltar">Voltar</button>
+                      <a href="home.php" class="btn btn-lg btn-warning btn-block" name="voltar">Voltar</a>
                     </div>
 
                     <div class="col-6">
