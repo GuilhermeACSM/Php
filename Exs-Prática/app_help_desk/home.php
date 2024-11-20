@@ -115,7 +115,7 @@
 
     <!-- Botão de sair posicionado no canto direito -->
     <div class="ml-auto">
-      <a href="index.php">
+      <a href="logout.php">
         <button class="btn-sair">
           <i class="fas fa-sign-out-alt"></i> Sair
         </button>

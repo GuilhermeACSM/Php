@@ -38,6 +38,13 @@ require_once "validador_acesso.php";
         <div class="card">
           <div class="card-header">
             Abertura de chamado
+            <?php if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'efetuado') { ?>
+              <div style="color: green;">
+                <script>
+                  alert('Chamado cadastrado com sucesso!')
+                </script>
+              </div>
+            <?php } ?>
           </div>
           <div class="card-body">
             <div class="row">
