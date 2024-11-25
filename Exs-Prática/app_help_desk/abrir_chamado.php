@@ -25,7 +25,7 @@ require_once "validador_acesso.php";
 <body>
 
   <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./home.php">
       <img src="IMG/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
       App Help Desk
     </a>
@@ -50,15 +50,15 @@ require_once "validador_acesso.php";
             <div class="row">
               <div class="col">
 
-                <form method="post">
+                <form method="post" action="registra_chamados.php">
                   <div class="form-group">
                     <label>Título</label>
-                    <input type="text" class="form-control" placeholder="Título">
+                    <input type="text" class="form-control" placeholder="Título" name="titulo">
                   </div>
 
                   <div class="form-group">
                     <label>Categoria</label>
-                    <select class="form-control">
+                    <select class="form-control" name="categoria">
                       <option>Criação Usuário</option>
                       <option>Impressora</option>
                       <option>Hardware</option>
@@ -69,7 +69,7 @@ require_once "validador_acesso.php";
 
                   <div class="form-group">
                     <label>Descrição</label>
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" name="descricao"></textarea>
                   </div>
 
                   <div class="row mt-5">

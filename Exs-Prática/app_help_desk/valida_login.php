@@ -1,35 +1,34 @@
 <?php
 session_start();
 
+// Lista de usuários fictícios com ID, e-mail e senha
 $usuarios = array (
-    ['email' => 'zguilherme@gmail.com', 'senha' => '12345'],
-    ['email' => 'guilherme@gmail.com', 'senha' => '123'],
-    ['email' => 'carlos@gmail.com', 'senha' => '1234']
+    ['id' => 1, 'email' => 'zguilherme@gmail.com', 'senha' => '12345', 'perfil' => 'administrador'],
+    ['id' => 2, 'email' => 'guilherme@gmail.com', 'senha' => '123', 'perfil' => 'usuario'],
+    ['id' => 3, 'email' => 'carlos@gmail.com', 'senha' => '1234', 'perfil' => 'usuario']
 );
 
 $usuarioAutenticado = false;
 
-//RECEBENDO OS DADOS VIA MÉTODO POST
+// Recebendo os dados via POST
 $emailUsuario = $_POST['email'];
 $senhaUsuario = $_POST['senha'];
 
-// AUTENTICANDO O USUÁRIO
-for ($idx = 0; $idx < count($usuarios); $idx++) {
-    if ($emailUsuario == $usuarios[$idx]['email'] && $senhaUsuario == $usuarios[$idx]['senha']) {
+// Autenticando o usuário
+foreach ($usuarios as $usuario) {
+    if ($emailUsuario == $usuario['email'] && $senhaUsuario == $usuario['senha']) {
         $usuarioAutenticado = true;
-        break;
-    } else {
-        $usuarioAutenticado = false;
+        $_SESSION['autenticado'] = 'sim';  // Definindo a sessão como autenticada
+        $_SESSION['id'] = $usuario['id']; // Armazenando o ID do usuário na sessão
+        $_SESSION['perfil'] = $usuario['perfil']; // Armazenando o perfil (Administrador/Usuário) na sessão
+        header('Location: home.php');
+        exit();
     }
 }
 
-if($usuarioAutenticado){
-    // VALIDANDO A SESSÃO
-    $_SESSION['autenticado'] = 'sim';
-    header('location: home.php');
-} else {
-    // VALIDANDO A SESSÃO
+if (!$usuarioAutenticado) {
     $_SESSION['autenticado'] = 'nao';
-    header('location: index.php?login=erro');
+    header('Location: index.php?login=erro');
+    exit();
 }
 ?>
