@@ -5,23 +5,27 @@ require_once "validador_acesso.php";
 $_sucesso = false;
 
 if ($_POST) {
-    // Organizando os dados, retirando "|" dos possíveis valores
+    // Certificando-se de que o id_usuario está correto
     $titulo = $_POST['titulo'];
     $categoria = $_POST['categoria'];
     $descricao = $_POST['descricao'];
-    $idUsuario = $_SESSION['id'];
-    $perfilUsuario = $_SESSION['select'];
 
-    mysqli_query($link, "INSERT INTO `tb_chamados`(`id_usuario`, `titulo`, `categoria`, `descricao`) VALUES ('$idUsuario','$titulo','$categoria','$descricao'");
+
+    // Inserir o chamado no banco de dados
+    $sql = mysqli_query($link, "INSERT INTO `tb_chamados`(`titulo`, `categoria`, `descricao`) VALUES ('$titulo','$categoria','$descricao');");
+
+    // Verificando o resultado da consulta
+    if ($sql) {
+        $_sucesso = true;
+    }
 
 
     unset($_POST);
-    $_sucesso = true;
+    // Verificar se a inserção foi bem-sucedida
+    if ($_sucesso) {
+        header('Location: abrir_chamado.php?cadastro=efetuado');
+    } else {
+        header('Location: abrir_chamado.php?cadastro=falha');
+    }
+    exit;
 }
-
-
-
-
-// Redirecionando o usuário de volta para a página de abertura de chamado
-header('Location: abrir_chamado.php?cadastro=efetuado');
-exit();

@@ -5,7 +5,7 @@ require_once "validador_acesso.php";
 $chamados = [];
 
 //Abrindo o arquivo para consultar os dados
-$arquivo = fopen('registros.hd', 'r');
+$arquivo = fopen('../../../App_Help_Desk/registros.hd', 'r');
 
 //Enquanto não for o final do arquivo ele entra;
 while (!feof($arquivo)) {

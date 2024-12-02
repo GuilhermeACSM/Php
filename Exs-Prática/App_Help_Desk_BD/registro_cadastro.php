@@ -1,21 +1,27 @@
 <?php
 require 'conexao.php';
 
-$_sucesso = false;
-
 if ($_POST) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $perfil = $_POST['select'];
 
-    mysqli_query($link, "INSERT INTO tb_usuarios(nome, email, senha, perfil) VALUES ('$nome', '$email', '$senha', '$perfil')");
+        // Verificar se o e-mail já existe no banco
+        $query = "SELECT email FROM tb_usuarios WHERE email = '$email'";
+        $resultado = mysqli_query($link, $query);
 
-    unset($_POST);
-    $_sucesso = true;
+        if (mysqli_num_rows($resultado) > 0) {
+            header('Location: cadastro.php?cadastro=erro&motivo=email');
+            exit();
+        }
 
-    header('Location: index.php?cadastro=sucesso');
-    exit();
+        // Inserir o registro
+        mysqli_query($link, "INSERT INTO tb_usuarios (nome, email, senha, perfil) VALUES ('$nome', '$email', '$senha', '$perfil')");
+        
+        $_sucesso = true;
+        header('Location: index.php?cadastro=sucesso');
+        
+        exit();
 }
-
 ?>

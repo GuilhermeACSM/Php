@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>App Help Desk</title>
@@ -54,6 +55,13 @@
                                     <option value="usuario">Usuario</option>
                                 </select>
                             </div>
+
+                            <?php if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'erro') { ?>
+                                <div style="color: red;">
+                                    <?php echo('E-mail já existente!')?>
+                                </div>
+                            <?php } ?>
+
                             <button class="btn btn-lg btn-info btn-block" type="save">Salvar</button>
                         </form>
 
@@ -63,6 +71,7 @@
             </div>
         </div>
 
-        
+
 </body>
+
 </html>

@@ -152,6 +152,18 @@ require_once "validador_acesso.php";
                                     <p>Consultar Chamado</p>
                                 </div>
                             </a>
+                            <a href="consultar_chamado.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="img/autorizacao.png" width="70" height="70" alt="Autorização">
+                                    <p>Autorização</p>
+                                </div>
+                            </a>
+                            <a href="consultar_chamado.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="img/editar-arquivo.png" width="70" height="70" alt="Editar Arquivo">
+                                    <p>Editar Arquivo</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

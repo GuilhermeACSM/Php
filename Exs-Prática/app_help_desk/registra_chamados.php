@@ -13,7 +13,7 @@ $perfilUsuario = str_replace('|', '-', $_SESSION['perfil']);
 $dados = $idUsuario . '|' . $perfilUsuario . '|' . $titulo . '|' . $categoria . '|' . $descricao . PHP_EOL;
 
 // Abrindo o arquivo e armazenando em uma variável
-$arquivo = fopen('registros.hd', 'a');
+$arquivo = fopen('../../../App_Help_Desk/registros.hd', 'a');
 
 // Escrevendo no arquivo
 fwrite($arquivo, $dados);
