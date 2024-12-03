@@ -50,10 +50,10 @@
 
                         <form action="valida_login.php" method="POST">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="E-mail" name="email" required>
+                                <input type="email" class="form-control" placeholder="E-mail" name="email" >
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Senha" name="senha" required>
+                                <input type="password" class="form-control" placeholder="Senha" name="senha" >
                             </div>
 
                             <?php
