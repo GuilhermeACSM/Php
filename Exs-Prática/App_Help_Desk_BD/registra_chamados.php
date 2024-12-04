@@ -18,8 +18,8 @@ if ($_POST) {
 
     // Verificar se a inserção foi bem-sucedida
     if($sql){
-        header('Location: home.php?cadastro=efetuado');
+        header('Location: abrir_chamado.php?cadastro=efetuado');
     } else {
-        header('Location: home.php?cadastro=falha');
+        header('Location: abrir_chamado.php?cadastro=falha');
     }
 }

@@ -138,32 +138,45 @@ require_once "validador_acesso.php";
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <!-- Link para abrir chamado -->
                             <a href="abrir_chamado.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="img/formulario_abrir_chamado.png" width="70" height="70" alt="Abrir Chamado">
                                     <p>Abrir Chamado</p>
                                 </div>
                             </a>
-                            <!-- Link para consultar chamado -->
+                            <!-- COLOCAR UM IF DE ADM PARA QUANDO FOR ADM VER TODOS OS CHAMADOS -->
                             <a href="consultar_chamado.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="img/formulario_consultar_chamado.png" width="70" height="70" alt="Consultar Chamado">
                                     <p>Consultar Chamado</p>
                                 </div>
                             </a>
-                            <a href="consultar_chamado.php" class="col-6">
+                            <!-- COLOCAR UM IF DE ADM -->
+                            <a href="autorizacao.php" class="col-6">
                                 <div class="card p-3 text-center">
-                                    <img src="img/autorizacao.png" width="70" height="70" alt="Autorização">
+                                    <img src="img/autorizacaoOld.png" width="70" height="70" alt="Autorização">
                                     <p>Autorização</p>
                                 </div>
                             </a>
-                            <a href="consultar_chamado.php" class="col-6">
+                            <a href="editar_arquivo.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="img/editar-arquivo.png" width="70" height="70" alt="Editar Arquivo">
                                     <p>Editar Arquivo</p>
                                 </div>
                             </a>
+                            <a href="usuarios.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="img/usuarios.png" width="70" height="70" alt="Usuários">
+                                    <p>Usuários</p>
+                                </div>
+                            </a>
+                            <a href="relatorios.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="img/relatorio.png" width="70" height="70" alt="Relátorios">
+                                    <p>Relátorios</p>
+                                </div>
+                            </a>
+                            <!-- COLOCAR UM IF DE ADM -->
                         </div>
                     </div>
                 </div>
