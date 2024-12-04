@@ -40,17 +40,20 @@ require_once "validador_acesso.php";
                 <div class="card">
                     <div class="card-header">
                         Abertura de chamado
-                        <?php
-                        if ($_POST) {
-                            if (isset($_GET['cadastro'])) {
-                                if ($_GET['cadastro'] === 'efetuado') {
-                                    echo '<script>alert("Chamado cadastrado com sucesso!");</script>';
-                                } elseif ($_GET['cadastro'] === 'falha') {
-                                    echo '<script>alert("Erro de inserção de chamado no banco, contate o administrador!");</script>';
-                                }
-                            }
-                        }
-                        ?>
+                        <?php 
+                        if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'efetuado') { ?>
+                            <div style="color: green;">
+                                <script>
+                                    alert('Chamado cadastrado com sucesso!')
+                                </script>
+                            </div>
+                        <?php } else if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'falha') { ?>
+                            <div style="color: red;">
+                                <script>
+                                    alert('Erro de inserção de chamado no banco, contate o administrador!')
+                                </script>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -88,7 +91,6 @@ require_once "validador_acesso.php";
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,10 @@
 <?php
 require_once "validador_acesso.php";
+require "conexao.php";
+
+$chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome 
+                                  FROM TB_CHAMADOS 
+                                  INNER JOIN TB_USUARIOS ON TB_CHAMADOS.id_usuario = TB_USUARIOS.id_usuario");
 ?>
 
 <html>
@@ -20,7 +25,6 @@ require_once "validador_acesso.php";
 </head>
 
 <body>
-
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="./home.php">
             <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -30,7 +34,6 @@ require_once "validador_acesso.php";
 
     <div class="container">
         <div class="row">
-
             <div class="card-consultar-chamado">
                 <div class="card">
                     <div class="card-header">
@@ -38,46 +41,24 @@ require_once "validador_acesso.php";
                     </div>
 
                     <div class="card-body">
-                        <!-- Rodamos um foreach passando por todos os chamados -->
                         <?php
-                        $usuarioId = $_SESSION['id'];
+                        $usuarioId = $_SESSION['id_usuario'];
                         $usuarioPerfil = $_SESSION['perfil'];
 
                         foreach ($chamados as $chamado) { ?>
-
-                            <!-- Usamos o explode para separar os valores de cada chamado em um novo array -->
-                            <?php $chamado_dados = explode('|', $chamado);
-
-                            //Para validar que só será exibido um novo card se possuir todos os valores preenchidos
-                            if (count($chamado_dados) < 5) {
-                                continue;
-                            }
-
-                            // Filtrando os chamados
-                            if ($usuarioPerfil != 'administrador' && $chamado_dados[0] != $usuarioId) {
-                                continue;
-                            }
-                            ?>
-
                             <div class="card mb-3 bg-light">
                                 <div class="card-body">
-                                    <!-- Nos 3 itens abaixo aplicamos os valores respectivos em cada um deles -->
-                                    <h5 class="card-title"><?php echo $chamado_dados[2] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado_dados[3] ?></h6>
-                                    <p class="card-text"><?php echo $chamado_dados[4] ?></p>
+                                    <h5 class="card-title"><?php echo $chamado['titulo'] ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado['categoria'] ?></h6>
+                                    <p class="card-text"><?php echo $chamado['descricao'] ?></p>
 
                                     <?php if ($usuarioPerfil == 'administrador') { ?>
-                                        <p class="card-text"><strong>ID do usuário:</strong> <?php echo $chamado_dados[0] ?></p>
+                                        <p class="card-text"><strong>Nome do usuário:</strong> <?php echo $chamado['nome']?></p>
+                                        <p class="card-text"><strong>ID do usuário:</strong> <?php echo $chamado['id_usuario'] ?></p>
                                     <?php } ?>
                                 </div>
                             </div>
                         <?php } ?>
-
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <a href="home.php" class="btn btn-lg btn-warning btn-block" type="submit">Voltar</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

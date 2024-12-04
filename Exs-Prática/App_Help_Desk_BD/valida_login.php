@@ -3,7 +3,7 @@ session_start();
 include 'conexao.php';
 
 
-$resultado = mysqli_query($link, 'SELECT email, senha FROM TB_USUARIOS');
+$resultado = mysqli_query($link, 'SELECT * FROM TB_USUARIOS');
 
 
 if (!$resultado) {
@@ -14,15 +14,16 @@ if (!$resultado) {
 $usuarioAutenticado = false;
 // Recebendo os dados via POST
 $emailUsuario = $_POST['email'];
-$senhaUsuario = $_POST['senha'];
+$senhaUsuario = md5($_POST['senha']);
 
 // Autenticando o usuário
+
 foreach ($resultado as $usuario) {
     if ($emailUsuario == $usuario['email'] && $senhaUsuario == $usuario['senha']) {
         $usuarioAutenticado = true;
-        $_SESSION['autenticado'] = 'sim';  // Definindo a sessão como autenticada
-        $_SESSION['id'] = $usuario['id']; // Armazenando o ID do usuário na sessão
-        $_SESSION['perfil'] = $usuario['perfil']; // Armazenando o perfil (Administrador/Usuário) na sessão
+        $_SESSION['autenticado'] = 'sim';
+        $_SESSION['id_usuario'] = $usuario['id_usuario']; 
+        $_SESSION['perfil'] = $usuario['perfil']; 
         header('Location: home.php');
         exit();
     }
@@ -32,8 +33,5 @@ if (!$usuarioAutenticado) {
     $_SESSION['autenticado'] = 'nao';
     header('Location: index.php?login=erro');
     exit();
-} else {
-    $_SESSION['autenticado'] = 'sim';
-    header('Location: home.php');
 }
 ?>

@@ -6,4 +6,11 @@ if(!isset($_SESSION['autenticado']) || ($_SESSION['autenticado']) != 'sim') {
 
     echo '<div class="text-danger"> Usuário ou senha inválido(s)!</div>';
 }
+
+
+if (isset($_SESSION['id_usuario'])) {
+    echo "ID do usuário logado: " . $_SESSION['id_usuario'];
+} else {
+    echo "Usuário não está autenticado.";
+}
 ?>

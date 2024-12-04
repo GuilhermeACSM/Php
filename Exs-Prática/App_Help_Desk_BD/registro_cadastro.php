@@ -4,7 +4,7 @@ require 'conexao.php';
 if ($_POST) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $senha = md5($_POST['senha']);
     $perfil = $_POST['select'];
 
         // Verificar se o e-mail já existe no banco
