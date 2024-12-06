@@ -71,10 +71,8 @@
                                 <div class="cadastro_link-div">
                                     <p><a href="cadastro.php" class="cadastro_link">Novo? Cadastre-se aqui!</a></p>
                                 </div>
-                            
                             <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
                         </form>
-
                     </div>
                 </div>
             </div>

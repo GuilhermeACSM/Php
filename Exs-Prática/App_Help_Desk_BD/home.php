@@ -144,24 +144,27 @@ require_once "validador_acesso.php";
                                     <p>Abrir Chamado</p>
                                 </div>
                             </a>
-                            <!-- COLOCAR UM IF DE ADM PARA QUANDO FOR ADM VER TODOS OS CHAMADOS -->
                             <a href="consultar_chamado.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="img/formulario_consultar_chamado.png" width="70" height="70" alt="Consultar Chamado">
                                     <p>Consultar Chamado</p>
                                 </div>
                             </a>
-                            <!-- COLOCAR UM IF DE ADM -->
-                            <a href="autorizacao.php" class="col-6">
-                                <div class="card p-3 text-center">
-                                    <img src="img/autorizacaoOld.png" width="70" height="70" alt="Autorização">
-                                    <p>Autorização</p>
-                                </div>
-                            </a>
                             <a href="editar_arquivo.php" class="col-6">
                                 <div class="card p-3 text-center">
                                     <img src="img/editar-arquivo.png" width="70" height="70" alt="Editar Arquivo">
                                     <p>Editar Arquivo</p>
+                                </div>
+                            </a>
+                            <?php 
+                            $usuarioId = $_SESSION['id_usuario'];
+                            $usuarioPerfil = $_SESSION['perfil'];
+
+                            if ($usuarioPerfil == 'administrador') { ?>
+                            <a href="autorizacao.php" class="col-6">
+                                <div class="card p-3 text-center">
+                                    <img src="img/autorizacaoOld.png" width="70" height="70" alt="Autorização">
+                                    <p>Autorização</p>
                                 </div>
                             </a>
                             <a href="usuarios.php" class="col-6">
@@ -176,7 +179,7 @@ require_once "validador_acesso.php";
                                     <p>Relátorios</p>
                                 </div>
                             </a>
-                            <!-- COLOCAR UM IF DE ADM -->
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

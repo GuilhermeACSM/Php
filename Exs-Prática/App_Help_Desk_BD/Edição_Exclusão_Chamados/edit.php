@@ -1,25 +1,28 @@
 <?php
-require_once "validador_acesso.php";
-require "conexao.php";
+require_once "../validador_acesso.php";
+require "../conexao.php";
 
-$chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome 
-                                  FROM TB_CHAMADOS 
-                                  INNER JOIN TB_USUARIOS ON TB_CHAMADOS.id_usuario = TB_USUARIOS.id_usuario");
+$chamados = mysqli_query($link, "SELECT titulo, categoria, descricao FROM TB_CHAMADOS");
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>App Help Desk</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <style>
-        .card-consultar-chamado {
+        .card-abrir-chamado {
             padding: 30px 0 0 0;
             width: 100%;
             margin: 0 auto;
+        }
+
+        .col-6 a {
+            text-decoration: none;
         }
 
         /* Estilos gerais */
@@ -35,11 +38,6 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
         .card-home {
             padding: 20px;
             margin: 0 auto;
-        }
-
-        .card-text {
-            font-size: small;
-            font-weight: normal;
         }
 
         .card-header {
@@ -124,14 +122,14 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="./home.php">
-            <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <a class="navbar-brand" href="../home.php">
+            <img src="../img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logo App Help Desk">
             App Help Desk
         </a>
 
         <!-- Botão de sair posicionado no canto direito -->
         <div class="ml-auto">
-            <a href="home.php">
+            <a href="../home.php">
                 <button class="btn-voltar">
                     <i class="fas fa-sign-out-alt"></i> Voltar
                 </button>
@@ -141,42 +139,58 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
 
     <div class="container">
         <div class="row">
-            <div class="card-consultar-chamado">
+
+            <div class="card-abrir-chamado">
                 <div class="card">
                     <div class="card-header">
-                        Consulta de chamado
+                        Editando chamado
                     </div>
-
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col">
 
-                        <?php
-                        $usuarioId = $_SESSION['id_usuario'];
-                        $usuarioPerfil = $_SESSION['perfil'];
+                                <form method="post" action="">
+                                    <div class="form-group">
+                                        <label>Título</label>
+                                        <input type="text" class="form-control" name="titulo">
+                                    </div>
 
-                        foreach ($chamados as $chamado) {
-                            if ($usuarioPerfil != 'administrador' && $chamado['id_usuario'] != $usuarioId) {
-                                continue;
-                            }
-                            ?>
-                            <div class="card mb-3 bg-light">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $chamado['titulo'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamado['categoria'] ?></h6>
-                                    <p class="card-text"><?php echo $chamado['descricao'] ?></p>
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <select class="form-control" name="categoria" >
+                                            <option>Criação Usuário</option>
+                                            <option>Impressora</option>
+                                            <option>Hardware</option>
+                                            <option>Software</option>
+                                            <option>Rede</option>
+                                        </select>
+                                    </div>
 
-                                    <?php if ($usuarioPerfil == 'administrador') { ?>
-                                        <p class="card-text"><strong>Nome do usuário:</strong> <?php echo $chamado['nome']?></p>
-                                        <p class="card-text"><strong>ID do usuário:</strong> <?php echo $chamado['id_usuario'] ?></p>
-                                    <?php } ?>
-                                </div>
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <textarea class="form-control" rows="3" name="descricao" required></textarea>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                        <div class="col-6">
+
+                                            <a href="home.php" class="btn btn-lg btn-warning btn-block" name="voltar">Voltar</a>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <button class="btn btn-lg btn-info btn-block" type="submit">Abrir</button>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
-                        <?php } ?>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

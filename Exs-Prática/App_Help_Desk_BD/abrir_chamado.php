@@ -172,12 +172,12 @@ require_once "validador_acesso.php";
                                 <form method="post" action="registra_chamados.php">
                                     <div class="form-group">
                                         <label>Título</label>
-                                        <input type="text" class="form-control" placeholder="Título" name="titulo">
+                                        <input type="text" class="form-control" placeholder="Título" name="titulo" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Categoria</label>
-                                        <select class="form-control" name="categoria">
+                                        <select class="form-control" name="categoria" required>
                                             <option>Criação Usuário</option>
                                             <option>Impressora</option>
                                             <option>Hardware</option>
@@ -188,7 +188,7 @@ require_once "validador_acesso.php";
 
                                     <div class="form-group">
                                         <label>Descrição</label>
-                                        <textarea class="form-control" rows="3" name="descricao"></textarea>
+                                        <textarea class="form-control" rows="3" name="descricao" required></textarea>
                                     </div>
 
                                     <div class="col-6">

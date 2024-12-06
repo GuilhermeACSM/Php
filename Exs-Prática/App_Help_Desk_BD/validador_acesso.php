@@ -7,7 +7,6 @@ if(!isset($_SESSION['autenticado']) || ($_SESSION['autenticado']) != 'sim') {
     echo '<div class="text-danger"> Usuário ou senha inválido(s)!</div>';
 }
 
-
 // IF PARA MOSTAR O ID DO USUARIO LOGADO
 /*
 if (isset($_SESSION['id_usuario'])) {
