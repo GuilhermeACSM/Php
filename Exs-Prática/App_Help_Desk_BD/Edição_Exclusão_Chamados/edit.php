@@ -2,7 +2,21 @@
 require_once "../validador_acesso.php";
 require "../conexao.php";
 
-$chamados = mysqli_query($link, "SELECT titulo, categoria, descricao FROM TB_CHAMADOS");
+$query = "SELECT * FROM TB_CHAMADOS where id_chamado = $_GET[id_chamado]";
+
+$resultado = mysqli_query($link, $query);
+$chamado = mysqli_fetch_assoc($resultado);
+
+
+if($_POST) {
+    $titulo = trim($_POST['titulo']);
+    $categoria = trim($_POST['categoria']);
+    $descricao = trim($_POST['descricao']);
+
+    mysqli_query($link, "UPDATE TB_CHAMADOS SET titulo='$titulo', categoria='$categoria', descricao='$descricao' where id_chamado = $_GET[id_chamado]" );
+
+    header('location:../editar_arquivo.php?acao=editado');
+}
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +143,7 @@ $chamados = mysqli_query($link, "SELECT titulo, categoria, descricao FROM TB_CHA
 
         <!-- Botão de sair posicionado no canto direito -->
         <div class="ml-auto">
-            <a href="../home.php">
+            <a href="../editar_arquivo.php">
                 <button class="btn-voltar">
                     <i class="fas fa-sign-out-alt"></i> Voltar
                 </button>
@@ -149,15 +163,16 @@ $chamados = mysqli_query($link, "SELECT titulo, categoria, descricao FROM TB_CHA
                         <div class="row">
                             <div class="col">
 
-                                <form method="post" action="">
+                                <form method="POST" action="">
                                     <div class="form-group">
                                         <label>Título</label>
-                                        <input type="text" class="form-control" name="titulo">
+                                        <input type="text" class="form-control" name="titulo"  value="<?php echo trim($chamado['titulo']); ?>">
                                     </div>
 
                                     <div class="form-group">
                                         <label>Categoria</label>
                                         <select class="form-control" name="categoria" >
+                                            <option value="<?php echo trim($chamado['categoria']);?>"><?php echo trim($chamado['categoria']);?></option>
                                             <option>Criação Usuário</option>
                                             <option>Impressora</option>
                                             <option>Hardware</option>
@@ -168,17 +183,14 @@ $chamados = mysqli_query($link, "SELECT titulo, categoria, descricao FROM TB_CHA
 
                                     <div class="form-group">
                                         <label>Descrição</label>
-                                        <textarea class="form-control" rows="3" name="descricao" required></textarea>
+                                        <textarea class="form-control" rows="3" name="descricao" required value="<?php echo trim($chamado['descricao']); ?>"><?php echo trim($chamado['descricao']); ?></textarea>
                                     </div>
 
                                     <div class="row mt-5">
                                         <div class="col-6">
 
-                                            <a href="home.php" class="btn btn-lg btn-warning btn-block" name="voltar">Voltar</a>
-                                        </div>
-
                                         <div class="col-6">
-                                            <button class="btn btn-lg btn-info btn-block" type="submit">Abrir</button>
+                                            <button class="btn btn-lg btn-info btn-block" type="submit">Editar</button>
                                         </div>
                                     </div>
                                 </form>

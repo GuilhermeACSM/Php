@@ -194,16 +194,14 @@ require_once "validador_acesso.php";
                                     <div class="col-6">
                                         <button class="btn btn-lg btn-info btn-block" type="submit">Abrir</button>
                                     </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
 </body>
 
 </html>

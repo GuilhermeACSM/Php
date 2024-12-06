@@ -1,11 +1,15 @@
 <?php
 require_once "validador_acesso.php";
+require_once "validador_acessoADM.php";
 require "conexao.php";
 
 $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome 
                                   FROM TB_CHAMADOS 
                                   INNER JOIN TB_USUARIOS ON TB_CHAMADOS.id_usuario = TB_USUARIOS.id_usuario");
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -125,6 +129,28 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
 </head>
 
 <body>
+    <?php if (isset($_GET['acao']) && $_GET['acao'] === 'excluir') { ?>
+        <div>
+            <script>
+                alert('Chamado excluido com sucesso!')
+                if (history.replaceState) {
+                    const url = window.location.href.split('?')[0];
+                    history.replaceState(null, null, url);
+                }
+            </script>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['acao']) && $_GET['acao'] === 'editado') { ?>
+        <div>
+            <script>
+                alert('Chamado editado com sucesso!')
+                if (history.replaceState) {
+                    const url = window.location.href.split('?')[0];
+                    history.replaceState(null, null, url);
+                }
+            </script>
+        </div>
+    <?php } ?>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="./home.php">
             <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -158,7 +184,7 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
                             if ($usuarioPerfil != 'administrador' && $chamado['id_usuario'] != $usuarioId) {
                                 continue;
                             }
-                            ?>
+                        ?>
                             <div class="card mb-3 bg-light">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $chamado['titulo'] ?></h5>
@@ -166,13 +192,16 @@ $chamados = mysqli_query($link, "SELECT TB_CHAMADOS.*, TB_USUARIOS.nome
                                     <p class="card-text"><?php echo $chamado['descricao'] ?></p>
 
                                     <?php if ($usuarioPerfil == 'administrador') { ?>
-                                        <p class="card-text"><strong>Nome do usuário:</strong> <?php echo $chamado['nome']?></p>
+                                        <p class="card-text"><strong>ID do chamado:</strong> <?php echo $chamado['id_chamado'] ?></p>
+                                        <p class="card-text"><strong>Nome do usuário:</strong> <?php echo $chamado['nome'] ?></p>
                                         <p class="card-text"><strong>ID do usuário:</strong> <?php echo $chamado['id_usuario'] ?></p>
                                     <?php } ?>
 
-                                    <a href="../App_Help_Desk_BD/Edição_Exclusão_Chamados/edit.php?id_usuario=<?php echo $chamado['id_usuario'] ?>"><button type="button" class="btn btn-success">Editar</button></a>
+                                    <a href="../App_Help_Desk_BD/Edição_Exclusão_Chamados/edit.php?id_chamado=<?php echo $chamado['id_chamado'] ?>"><button type="button" class="btn btn-success">Editar</button></a>
 
-                                    <a href="../App_Help_Desk_BD/Edição_Exclusão_Chamados/delete.php?acao=excluir&id_usuario=<?php echo $chamado['id_usuario'] ?>"><button type="button" class="btn btn-danger">Excluir</button></a>
+                                    <a href="../App_Help_Desk_BD/Edição_Exclusão_Chamados/delete.php?acao=excluir&id_chamado=<?php echo $chamado['id_chamado'] ?>"><button type="button" class="btn btn-danger">Excluir</button></a>
+
+
                                 </div>
                             </div>
                         <?php } ?>
