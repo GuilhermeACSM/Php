@@ -12,8 +12,9 @@ if($_POST) {
     $titulo = trim($_POST['titulo']);
     $categoria = trim($_POST['categoria']);
     $descricao = trim($_POST['descricao']);
+    $status = trim($_POST['status']);
 
-    mysqli_query($link, "UPDATE TB_CHAMADOS SET titulo='$titulo', categoria='$categoria', descricao='$descricao' where id_chamado = $_GET[id_chamado]" );
+    mysqli_query($link, "UPDATE TB_CHAMADOS SET titulo='$titulo', categoria='$categoria', descricao='$descricao', status='$status' where id_chamado = $_GET[id_chamado]" );
 
     header('location:../editar_arquivo.php?acao=editado');
 }
@@ -26,112 +27,9 @@ if($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/style.css">
     <title>App Help Desk</title>
 
-    <style>
-        .card-abrir-chamado {
-            padding: 30px 0 0 0;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .col-6 a {
-            text-decoration: none;
-        }
-
-        /* Estilos gerais */
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-
-        .navbar {
-            margin-bottom: 20px;
-        }
-
-        .card-home {
-            padding: 20px;
-            margin: 0 auto;
-        }
-
-        .card-header {
-            font-weight: bold;
-            background-color: #343a40;
-            color: white;
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .col-6 {
-            margin: auto;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .row a {
-            text-decoration: none;
-        }
-
-        .card img {
-            border-radius: 8px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .card p {
-            font-weight: 600;
-            color: #343a40;
-        }
-
-        /* Estilo do botão de sair */
-        .btn-voltar {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        /* Efeito de hover no botão */
-        .btn-voltar:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        .btn-voltar:focus {
-            outline: none;
-        }
-
-        /* Responsividade para dispositivos menores */
-        @media (max-width: 768px) {
-            .row {
-                flex-direction: column;
-            }
-
-            .col-6 {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-        }
-
-        /* Responsividade para dispositivos maiores */
-        @media (min-width: 768px) {
-            .col-6 {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -178,6 +76,16 @@ if($_POST) {
                                             <option>Hardware</option>
                                             <option>Software</option>
                                             <option>Rede</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control" name="status" required>
+                                            <option value="<?php echo trim($chamado['status']);?>" disabled selected><?php echo trim($chamado['status']);?></option>
+                                            <option>Aberto</option>
+                                            <option>Andamento</option>
+                                            <option>Finalizado</option>
                                         </select>
                                     </div>
 
